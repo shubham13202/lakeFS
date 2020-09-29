@@ -4,6 +4,10 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"net/url"
+	"strings"
+	"time"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -17,9 +21,6 @@ import (
 	"github.com/treeverse/lakefs/api/gen/client/setup"
 	"github.com/treeverse/lakefs/api/gen/models"
 	"github.com/treeverse/lakefs/logging"
-	"net/url"
-	"strings"
-	"time"
 )
 
 func SetupTestingEnv(name, storageNS string) (logging.Logger, *genclient.Lakefs, *s3.S3) {
@@ -27,7 +28,7 @@ func SetupTestingEnv(name, storageNS string) (logging.Logger, *genclient.Lakefs,
 
 	viper.SetDefault("setup_lakefs", true)
 	viper.SetDefault("setup_lakefs_timeout", 5*time.Minute)
-	viper.SetDefault("endpoint_url", "http://internal-benchmark-load-balancer-1759434086.us-east-1.elb.amazonaws.com:8000")
+	viper.SetDefault("endpoint_url", "http://localhost:8000")
 	viper.SetDefault("s3_endpoint", "s3.local.lakefs.io:8000")
 	viper.SetDefault("access_key_id", "")
 	viper.SetDefault("secret_access_key", "")
